@@ -5,10 +5,10 @@ extends CharacterBody2D
 var direction = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	movement()
+	movement(delta)
 
-func movement():
+func movement(delta: float):
 	direction = %player.global_position - global_position
 	direction = direction.normalized()
 	velocity = direction * speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
