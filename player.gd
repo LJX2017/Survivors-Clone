@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+var hp = 80
 var speed = 40.0
 var direction = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
@@ -25,3 +25,8 @@ func update_animation():
 		animated_sprite.flip_h = true
 	elif direction.x < 0:
 		animated_sprite.flip_h = false
+
+
+func _on_hurt_box_hurt(damage: Variant) -> void:
+	hp -= damage
+	print(hp)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0nr6icds53ur"]
+[gd_scene load_steps=9 format=3 uid="uid://d0nr6icds53ur"]
 
 [ext_resource type="Texture2D" uid="uid://cushchqd51e2y" path="res://Textures/Enemy/kolbold_weak.png" id="1_3sp8v"]
 [ext_resource type="Script" uid="uid://dy6qbaa162q6i" path="res://kolbold_weak.gd" id="1_atjbm"]
+[ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="3_mvyi5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atjbm"]
 atlas = ExtResource("1_3sp8v")
@@ -29,6 +30,9 @@ animations = [{
 radius = 6.0
 height = 16.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvyi5"]
+size = Vector2(12, 17)
+
 [node name="kolbold_weak" type="CharacterBody2D"]
 script = ExtResource("1_atjbm")
 speed = 15.0
@@ -41,3 +45,11 @@ frame_progress = 0.66609085
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 6)
 shape = SubResource("CapsuleShape2D_atjbm")
+
+[node name="hit_box" parent="." instance=ExtResource("3_mvyi5")]
+
+[node name="CollisionShape2D" parent="hit_box" index="0"]
+position = Vector2(2, 5.5)
+shape = SubResource("RectangleShape2D_mvyi5")
+
+[editable path="hit_box"]
