@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var hp: int = 10
 
 @export var speed = 20.0
 var direction = Vector2.ZERO

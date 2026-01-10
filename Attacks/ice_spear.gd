@@ -24,3 +24,6 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		pierce -= 1
 		if pierce <= 0:
 			queue_free()
+
+func _on_lifetime_timer_timeout() -> void:
+	queue_free()

@@ -37,4 +37,17 @@ func _on_hurt_box_hurt(damage: Variant) -> void:
 
 
 func _on_ice_spear_timer_timeout() -> void:
-	pass # Replace with function body.
+	if ice_spear_scene == null:
+		print("ice_spear_scene is null")
+		return
+	var spear: Node2D = ice_spear_scene.instantiate()
+	#var target = get_nearest_enemy()
+	#var aim_direction = (target.global_position - global_position).normalized()
+	var aim_direction = Vector2.RIGHT
+	spear.global_position = global_position
+	spear.direction = aim_direction
+	get_parent().add_child(spear)
+	ice_spear_timer.start()
+	
+func get_nearest_enemy() -> Node2D:
+	return null
