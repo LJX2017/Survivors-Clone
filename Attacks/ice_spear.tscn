@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://w24vtndhmshd"]
+
+[ext_resource type="Script" uid="uid://8v4pyt53jyob" path="res://ice_spear.gd" id="1_40u16"]
+[ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="2_30egu"]
+[ext_resource type="Texture2D" uid="uid://mivb111h8ucf" path="res://Utils/ice_spear.png" id="2_rkoad"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ye21e"]
+size = Vector2(34, 8)
+
+[node name="ice_spear" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_40u16")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 2.3561945
+texture = ExtResource("2_rkoad")
+
+[node name="hit_box" parent="." instance=ExtResource("2_30egu")]
+collision_layer = 4
+collision_mask = 4
+damage = 50
+
+[node name="CollisionShape2D" parent="hit_box" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ye21e")
+
+[node name="lifetime_timer" type="Timer" parent="."]
+
+[editable path="hit_box"]

@@ -6,7 +6,15 @@ extends Area2D
 @onready var disable_timer = $DisableTimer
 signal hurt(damage)
 
+@export var debug_prints = true
+
+func _ready() -> void:
+	if debug_prints:
+		print("HurtBox ready. layer=", collision_layer, " mask=", collision_mask, " groups=", get_groups())
+
 func _on_area_entered(area: Area2D) -> void:
+	if debug_prints:
+		print("HurtBox area_entered. area=", area, " area_groups=", area.get_groups())
 	if area.is_in_group("damage"):
 		if area.get("damage") != null:
 			match HurtBoxType:
