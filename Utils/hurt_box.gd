@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var hp: int = 10
+
 @export_enum("Cooldown", "DisableHitbox") var HurtBoxType: int
 
 @onready var collision = $CollisionShape2D

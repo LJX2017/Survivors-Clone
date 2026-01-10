@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0nr6icds53ur"]
+[gd_scene load_steps=11 format=3 uid="uid://d0nr6icds53ur"]
 
 [ext_resource type="Texture2D" uid="uid://cushchqd51e2y" path="res://Textures/Enemy/kolbold_weak.png" id="1_3sp8v"]
-[ext_resource type="Script" uid="uid://dy6qbaa162q6i" path="res://kolbold_weak.gd" id="1_atjbm"]
+[ext_resource type="Script" uid="uid://4knqh6mq85jr" path="res://Utils/hurt_box.gd" id="1_4cpb7"]
 [ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="3_mvyi5"]
+[ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_y8chg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_atjbm"]
 atlas = ExtResource("1_3sp8v")
@@ -30,12 +31,14 @@ animations = [{
 radius = 6.0
 height = 16.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pyar"]
+size = Vector2(21, 27)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvyi5"]
 size = Vector2(12, 17)
 
 [node name="kolbold_weak" type="CharacterBody2D"]
-script = ExtResource("1_atjbm")
-speed = 15.0
+script = ExtResource("1_4cpb7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4cpb7")
@@ -45,6 +48,13 @@ frame_progress = 0.66609085
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 6)
 shape = SubResource("CapsuleShape2D_atjbm")
+script = ExtResource("1_4cpb7")
+
+[node name="hurt_box" parent="." instance=ExtResource("3_y8chg")]
+
+[node name="CollisionShape2D" parent="hurt_box" index="0"]
+position = Vector2(0.5, 2.5)
+shape = SubResource("RectangleShape2D_6pyar")
 
 [node name="hit_box" parent="." instance=ExtResource("3_mvyi5")]
 
@@ -52,4 +62,7 @@ shape = SubResource("CapsuleShape2D_atjbm")
 position = Vector2(2, 5.5)
 shape = SubResource("RectangleShape2D_mvyi5")
 
+[connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
+
+[editable path="hurt_box"]
 [editable path="hit_box"]

@@ -22,3 +22,9 @@ func update_animation():
 		animated_sprite.flip_h = true
 	elif direction.x < 0:
 		animated_sprite.flip_h = false
+
+
+func _on_hurt_box_hurt(damage: Variant) -> void:
+	hp -= damage
+	if hp <= 0:
+		queue_free()
