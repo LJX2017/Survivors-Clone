@@ -4,13 +4,14 @@ extends CharacterBody2D
 @export var speed = 20.0
 var direction = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
+var player: Node2D
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
 	update_animation()
 
 func movement(delta: float):
-	direction = %player.global_position - global_position
+	direction = player.global_position - global_position
 	direction = direction.normalized()
 	velocity = direction * speed
 	animated_sprite.play("walk")

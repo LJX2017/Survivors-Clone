@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://dhb0kil63lshi"]
+[gd_scene load_steps=9 format=4 uid="uid://dhb0kil63lshi"]
 
 [ext_resource type="Texture2D" uid="uid://dxtsjtql56noq" path="res://Textures/dirt_full_new.png" id="1_rafyw"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="2_w4ohl"]
-[ext_resource type="PackedScene" uid="uid://d0nr6icds53ur" path="res://kolbold_weak.tscn" id="3_ing58"]
+[ext_resource type="PackedScene" uid="uid://xl62p264dnul" path="res://Utils/enemy_spawner.tscn" id="3_ing58"]
+[ext_resource type="Script" uid="uid://4sfnuqnuucjn" path="res://Utils/spawn_info.gd" id="4_mlhrl"]
+[ext_resource type="PackedScene" uid="uid://d0nr6icds53ur" path="res://kolbold_weak.tscn" id="5_mpga5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4ohl"]
 texture = ExtResource("1_rafyw")
@@ -14,6 +16,13 @@ texture = ExtResource("1_rafyw")
 [sub_resource type="TileSet" id="TileSet_ing58"]
 sources/0 = SubResource("TileSetAtlasSource_w4ohl")
 
+[sub_resource type="Resource" id="Resource_0j8i5"]
+script = ExtResource("4_mlhrl")
+time_end = 10
+enemy = ExtResource("5_mpga5")
+enemy_num = 1
+metadata/_custom_type_script = "uid://4sfnuqnuucjn"
+
 [node name="Survivors" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -23,5 +32,5 @@ tile_set = SubResource("TileSet_ing58")
 [node name="player" parent="." instance=ExtResource("2_w4ohl")]
 unique_name_in_owner = true
 
-[node name="kolbold_weak" parent="." instance=ExtResource("3_ing58")]
-position = Vector2(34, 102)
+[node name="enemy_spawner" parent="." instance=ExtResource("3_ing58")]
+spawns = Array[ExtResource("4_mlhrl")]([SubResource("Resource_0j8i5")])
