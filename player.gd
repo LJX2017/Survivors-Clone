@@ -41,13 +41,23 @@ func _on_ice_spear_timer_timeout() -> void:
 		print("ice_spear_scene is null")
 		return
 	var spear: Node2D = ice_spear_scene.instantiate()
-	#var target = get_nearest_enemy()
-	#var aim_direction = (target.global_position - global_position).normalized()
+	var target = get_nearest_enemy()
 	var aim_direction = Vector2.RIGHT
+	if target != null:
+		aim_direction = (target.global_position - global_position).normalized()
 	spear.global_position = global_position
 	spear.direction = aim_direction
 	get_parent().add_child(spear)
 	ice_spear_timer.start()
 	
 func get_nearest_enemy() -> Node2D:
-	return null
+	var nearest: Node2D = null
+	var nearest_distance = INF
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		if enemy is Node2D:
+			var distance = global_position.distance_squared_to(enemy.global_position)
+			if distance < nearest_distance:
+				nearest_distance = distance
+				nearest = enemy
+	return nearest

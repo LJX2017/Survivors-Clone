@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=10 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://w24vtndhmshd" path="res://Attacks/ice_spear.tscn" id="2_hqtel"]
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
@@ -35,6 +36,7 @@ size = Vector2(10, 20)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
+ice_spear_scene = ExtResource("2_hqtel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")
@@ -57,6 +59,8 @@ drag_bottom_margin = 0.1
 remote_path = NodePath("../Camera2D")
 
 [node name="hurt_box" parent="." instance=ExtResource("3_i3pqv")]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" parent="hurt_box" index="0"]
 position = Vector2(1, 5)

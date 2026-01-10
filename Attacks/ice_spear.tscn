@@ -15,6 +15,9 @@ rotation = 2.3561945
 texture = ExtResource("1_dsfm4")
 
 [node name="hit_box" parent="." instance=ExtResource("2_40u16")]
+collision_layer = 4
+collision_mask = 4
+damage = 5
 
 [node name="CollisionShape2D" parent="hit_box" index="0"]
 position = Vector2(0, 1)
