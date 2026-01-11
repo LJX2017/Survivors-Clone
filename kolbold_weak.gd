@@ -31,5 +31,10 @@ func update_animation():
 func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_amount: float) -> void:
 	hp -= damage
 	if hp <= 0:
+		animated_sprite.play("explode")
+		set_physics_process(false)
+		
+		await animated_sprite.animation_finished
 		queue_free()
 	knockback = knockback_amount * knockback_direction
+	
