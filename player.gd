@@ -53,11 +53,23 @@ func _on_ice_spear_timer_timeout() -> void:
 func get_nearest_enemy() -> Node2D:
 	var nearest: Node2D = null
 	var nearest_distance = INF
+	var world_rect = get_viewport_world_rect()
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
 		if enemy is Node2D:
+			if world_rect != null and not world_rect.has_point(enemy.global_position):
+				continue
 			var distance = global_position.distance_squared_to(enemy.global_position)
 			if distance < nearest_distance:
 				nearest_distance = distance
 				nearest = enemy
 	return nearest
+
+func get_viewport_world_rect() -> Rect2:
+	var vp := get_viewport()
+	var cam := vp.get_camera_2d()
+	if cam == null:
+		return Rect2(vp.get_visible_rect())
+	var size := vp.get_visible_rect().size * cam.zoom
+	var top_left := cam.global_position - size * 0.5
+	return Rect2(top_left, size)

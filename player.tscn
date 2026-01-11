@@ -47,9 +47,7 @@ position = Vector2(1, 7)
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+limit_enabled = false
 drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
