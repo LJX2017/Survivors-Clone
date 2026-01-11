@@ -1,8 +1,11 @@
 extends Area2D
 
+@export var knockback_amount: float = 40
 @export var damage = 2
 @onready var collision = $CollisionShape2D
 @onready var disable_timer = $DisableTimer
+
+var direction: Vector2 = Vector2.ZERO
 
 func temp_disable():
 	collision.set_deferred("disabled", true)
