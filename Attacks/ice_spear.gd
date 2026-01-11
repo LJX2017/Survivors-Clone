@@ -12,7 +12,7 @@ var direction = Vector2.RIGHT
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rotation = direction.angle()
-	#hit_box.area_entered.connect(_on_hit_box_area_entered)
+	hit_box.direction = direction
 	lifetime_timer.wait_time = lifetime
 	lifetime_timer.start()
 	

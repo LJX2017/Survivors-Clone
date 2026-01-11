@@ -6,6 +6,8 @@ extends CharacterBody2D
 var direction = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
 var player: Node2D
+var knockback_direction
+var knockback_amount
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -25,7 +27,7 @@ func update_animation():
 		animated_sprite.flip_h = false
 
 
-func _on_hurt_box_hurt(damage: Variant) -> void:
+func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_amount: float) -> void:
 	hp -= damage
 	if hp <= 0:
 		queue_free()
