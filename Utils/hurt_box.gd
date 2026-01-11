@@ -16,10 +16,10 @@ func _on_area_entered(area: Area2D) -> void:
 				1:
 					if area.has_method("temp_disable"):
 						area.temp_disable()
-			var knockback_direction := Vector2.ZERO
-			if area.get("knockback_direction") != null:
-				knockback_direction = area.knockback_direction
-			var knockback_amount := 0.0
+			var knockback_direction = Vector2.ZERO
+			if area.get("direction") != null:
+				knockback_direction = area.direction
+			var knockback_amount = 0.0
 			if area.get("knockback_amount") != null:
 				knockback_amount = area.knockback_amount
 			emit_signal("hurt", area.damage, knockback_direction, knockback_amount)
