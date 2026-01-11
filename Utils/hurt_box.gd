@@ -19,7 +19,7 @@ func _on_area_entered(area: Area2D) -> void:
 			var knockback_direction = Vector2.ZERO
 			var knockback_amount = 0.0
 			if area.get("direction") != null:
-				knockback_direction = area.gravity_direction
+				knockback_direction = area.direction
 			if area.get("knockback_amount") != null:
 				knockback_amount = area.knockback_amount
 			emit_signal("hurt", area.damage, knockback_direction, knockback_amount)
