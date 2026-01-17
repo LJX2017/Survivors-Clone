@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce834yu180h1o"]
+[gd_scene load_steps=5 format=3 uid="uid://ce834yu180h1o"]
 
 [ext_resource type="Script" uid="uid://4vr14kgceinp" path="res://Attacks/tornado.gd" id="1_g7vm2"]
 [ext_resource type="Texture2D" uid="uid://dqgr78vuxvon4" path="res://Textures/Items/Weapons/tornado.png" id="2_g7vm2"]
 [ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="3_m06ql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7vm2"]
+size = Vector2(17, 26)
 
 [node name="tornado" type="Node2D"]
 script = ExtResource("1_g7vm2")
@@ -15,4 +18,10 @@ wait_time = 2.0
 
 [node name="hit_box" parent="." instance=ExtResource("3_m06ql")]
 
+[node name="CollisionShape2D" parent="hit_box" index="0"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_g7vm2")
+
 [connection signal="timeout" from="lifetime_timer" to="." method="_on_lifetime_timer_timeout"]
+
+[editable path="hit_box"]

@@ -56,8 +56,9 @@ func _on_ice_spear_timer_timeout() -> void:
 	
 func _on_tornado_timer_timeout() -> void:
 	for i in range(number_of_tornados):
-		var new_angle = PI / number_of_tornados * i
+		var new_angle = TAU * float(i) / max(1, number_of_tornados)
 		var tornado: Node2D = tornado_scene.instantiate()
+		tornado.center = self
 		tornado.angle = new_angle
 		get_parent().add_child(tornado)
 	tornado_timer.start()

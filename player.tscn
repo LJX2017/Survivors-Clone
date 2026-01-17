@@ -39,6 +39,7 @@ size = Vector2(10, 20)
 script = ExtResource("1_onrkg")
 ice_spear_scene = ExtResource("2_hqtel")
 tornado_scene = ExtResource("3_sweqy")
+number_of_tornados = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")
@@ -70,6 +71,7 @@ shape = SubResource("RectangleShape2D_i3pqv")
 autostart = true
 
 [node name="tornado_timer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]

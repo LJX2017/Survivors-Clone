@@ -2,7 +2,7 @@ extends Node2D
 
 @export var radius: float = 50.0
 @export var angular_speed: float = 3
-@export var lifetime: float = 5
+@export var lifetime: float = 2
 @export var damage: float = 2
 
 @onready var hit_box = get_node('hit_box')
@@ -26,9 +26,6 @@ func _physics_process(delta: float) -> void:
 	var new_position = center.global_position + Vector2(radius, 0).rotated(angle)
 	global_position = new_position
 	prev_position = global_position
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_lifetime_timer_timeout() -> void:
