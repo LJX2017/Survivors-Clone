@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce834yu180h1o"]
+
+[ext_resource type="Texture2D" uid="uid://dqgr78vuxvon4" path="res://Textures/Items/Weapons/tornado.png" id="2_g7vm2"]
+
+[sub_resource type="GDScript" id="GDScript_rx2tk"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="tornado" type="Node2D"]
+script = SubResource("GDScript_rx2tk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_g7vm2")
+
+[node name="lifetime_timer" type="Timer" parent="."]
+wait_time = 2.0
