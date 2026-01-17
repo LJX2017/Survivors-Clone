@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=11 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://w24vtndhmshd" path="res://Attacks/ice_spear.tscn" id="2_hqtel"]
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://dw4al34igxtry" path="res://Attacks/tornado.tscn" id="3_sweqy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -37,6 +38,7 @@ size = Vector2(10, 20)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
 ice_spear_scene = ExtResource("2_hqtel")
+tornado_scene = ExtResource("3_sweqy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hqtel")
@@ -65,9 +67,14 @@ position = Vector2(1, 5)
 shape = SubResource("RectangleShape2D_i3pqv")
 
 [node name="ice_spear_timer" type="Timer" parent="."]
+wait_time = 100000.0
+autostart = true
+
+[node name="tornado_timer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
+[connection signal="timeout" from="tornado_timer" to="." method="_on_tornado_timer_timeout"]
 
 [editable path="hurt_box"]

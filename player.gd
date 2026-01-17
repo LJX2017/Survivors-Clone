@@ -4,10 +4,12 @@ var hp = 80
 var speed = 40.0
 var direction = Vector2.ZERO
 @export var ice_spear_scene: PackedScene
-
+@export var tornado_scene: PackedScene
+@export var number_of_tornados: int = 5
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ice_spear_timer = $ice_spear_timer
+@onready var tornado_timer = $tornado_timer
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -31,7 +33,7 @@ func update_animation():
 		animated_sprite.flip_h = false
 
 
-func _on_hurt_box_hurt(damage: Variant) -> void:
+func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_amount: float) -> void:
 	hp -= damage
 	print(hp)
 
@@ -49,6 +51,20 @@ func _on_ice_spear_timer_timeout() -> void:
 	spear.direction = aim_direction
 	get_parent().add_child(spear)
 	ice_spear_timer.start()
+	
+func _on_tornado_timer_timeout() -> void:
+	if tornado_scene == null:
+		print("tornado_scene is null")
+		return
+	for i in range(number_of_tornados):
+		var tornado: Node2D = tornado_scene.instantiate()
+		var base_angle = TAU * float(i) / max(1, number_of_tornados)
+		var aim_direction = Vector2.RIGHT.rotated(base_angle)
+		tornado.global_position = global_position
+		tornado.direction = aim_direction
+		tornado.center = self
+		get_parent().add_child(tornado)
+		tornado_timer.start()
 	
 func get_nearest_enemy() -> Node2D:
 	var nearest: Node2D = null
