@@ -31,7 +31,7 @@ func update_animation():
 		animated_sprite.flip_h = false
 
 
-func _on_hurt_box_hurt(damage: Variant) -> void:
+func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_amount: float) -> void:
 	hp -= damage
 	print(hp)
 

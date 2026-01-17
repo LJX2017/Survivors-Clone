@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var knockback_amount: float = 40
-@export var damage = 2
+@export var damage: float = 2
 @onready var collision = $CollisionShape2D
 @onready var disable_timer = $DisableTimer
 
