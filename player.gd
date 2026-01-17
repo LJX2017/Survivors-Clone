@@ -4,10 +4,13 @@ var hp = 80
 var speed = 40.0
 var direction = Vector2.ZERO
 @export var ice_spear_scene: PackedScene
+@export var tornado_scene: PackedScene
 
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ice_spear_timer = $ice_spear_timer
+@onready var tornado_timer = $tornado_timer
+@export var number_of_tornados: int = 1
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -49,6 +52,15 @@ func _on_ice_spear_timer_timeout() -> void:
 	spear.direction = aim_direction
 	get_parent().add_child(spear)
 	ice_spear_timer.start()
+	
+	
+func _on_tornado_timer_timeout() -> void:
+	for i in range(number_of_tornados):
+		var new_angle = PI / number_of_tornados * i
+		var tornado: Node2D = tornado_scene.instantiate()
+		tornado.angle = new_angle
+		get_parent().add_child(tornado)
+	tornado_timer.start()
 	
 func get_nearest_enemy() -> Node2D:
 	var nearest: Node2D = null
