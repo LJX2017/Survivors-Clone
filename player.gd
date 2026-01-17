@@ -12,6 +12,9 @@ var direction = Vector2.ZERO
 @onready var tornado_timer = $tornado_timer
 @export var number_of_tornados: int = 1
 
+func _ready() -> void:
+	_on_tornado_timer_timeout()
+
 func _physics_process(delta: float) -> void:
 	movement(delta)
 	update_animation()
@@ -60,7 +63,7 @@ func _on_tornado_timer_timeout() -> void:
 		var tornado: Node2D = tornado_scene.instantiate()
 		tornado.center = self
 		tornado.angle = new_angle
-		get_parent().add_child(tornado)
+		get_parent().add_child.call_deferred(tornado)
 	tornado_timer.start()
 	
 func get_nearest_enemy() -> Node2D:

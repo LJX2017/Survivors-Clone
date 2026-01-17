@@ -11,6 +11,7 @@ extends Node2D
 var prev_position: Vector2 = Vector2.ZERO
 var angle: float = 0
 var center: Node2D = null
+var direction: Vector2 = Vector2.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,8 @@ func _physics_process(delta: float) -> void:
 	var new_position = center.global_position + Vector2(radius, 0).rotated(angle)
 	global_position = new_position
 	prev_position = global_position
+	direction = (new_position - prev_position).normalized()
+	hit_box.direction = direction
 
 
 func _on_lifetime_timer_timeout() -> void:

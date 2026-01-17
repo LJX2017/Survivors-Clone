@@ -68,7 +68,6 @@ position = Vector2(1, 5)
 shape = SubResource("RectangleShape2D_i3pqv")
 
 [node name="ice_spear_timer" type="Timer" parent="."]
-autostart = true
 
 [node name="tornado_timer" type="Timer" parent="."]
 wait_time = 5.0
