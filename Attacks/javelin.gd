@@ -11,7 +11,7 @@ extends Node2D
 
 var direction = Vector2.RIGHT
 
-var thresh = 0.5
+var thresh: float = 0.5
 
 var return_target: Node2D = null
 
@@ -32,8 +32,10 @@ func _physics_process(delta: float):
 		position += direction * speed * delta
 	else:
 		direction = (return_target.global_position - global_position).normalized()
+		hit_box.direction = direction
 		position += direction * speed * delta
-		if (return_target.global_position - position)
+		if (position.distance_squared_to(return_target.global_position) < thresh):
+			queue_free()
 		
 
 func _on_return_timer_timeout() -> void:

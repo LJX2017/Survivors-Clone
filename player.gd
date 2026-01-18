@@ -15,7 +15,8 @@ var direction = Vector2.ZERO
 @export var number_of_tornados: int = 1
 
 func _ready() -> void:
-	_on_tornado_timer_timeout()
+	pass
+	#_on_tornado_timer_timeout()
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -78,6 +79,7 @@ func _on_javelin_timer_timeout() -> void:
 	if target != null:
 		aim_direction = (target.global_position - global_position).normalized()
 	javelin.global_position = global_position
+	javelin.return_target = self
 	javelin.direction = aim_direction
 	get_parent().add_child(javelin)
 	javelin_timer.start()

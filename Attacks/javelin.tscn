@@ -29,10 +29,8 @@ size = Vector2(36, 4)
 
 [node name="javelin" type="Node2D"]
 script = ExtResource("1_nxkuw")
-speed = null
-return_time = null
-damage = null
-knockback_amount = null
+return_time = 1
+damage = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 2.3561945
@@ -40,6 +38,8 @@ sprite_frames = SubResource("SpriteFrames_nxkuw")
 animation = &"attack"
 
 [node name="hit_box" parent="." instance=ExtResource("3_ijvbt")]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" parent="hit_box" index="0"]
 shape = SubResource("RectangleShape2D_ijvbt")
