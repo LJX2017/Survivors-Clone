@@ -26,8 +26,8 @@ func _physics_process(delta: float) -> void:
 	angle += angular_speed * delta
 	var new_position = center.global_position + Vector2(radius, 0).rotated(angle)
 	global_position = new_position
-	prev_position = global_position
 	direction = (new_position - prev_position).normalized()
+	prev_position = global_position
 	hit_box.direction = direction
 
 
