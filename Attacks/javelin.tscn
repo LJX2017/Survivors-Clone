@@ -29,6 +29,10 @@ size = Vector2(36, 4)
 
 [node name="javelin" type="Node2D"]
 script = ExtResource("1_nxkuw")
+speed = null
+return_time = null
+damage = null
+knockback_amount = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 2.3561945

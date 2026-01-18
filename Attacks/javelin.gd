@@ -7,30 +7,34 @@ extends Node2D
 @export var knockback_amount = 150
 @onready var hit_box = get_node("hit_box")
 @onready var return_timer = get_node("return_timer")
+@onready var animated_sprite:AnimatedSprite2D = get_node("AnimatedSprite2D")
 
 var direction = Vector2.RIGHT
+
+var thresh = 0.5
+
+var return_target: Node2D = null
 
 var is_return = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	animated_sprite.play("attack")
 	rotation = direction.angle()
 	hit_box.direction = direction
 	hit_box.knockback_amount = knockback_amount
 	hit_box.damage = damage
 	return_timer.wait_time = return_time
 	return_timer.start()
-	
 
 func _physics_process(delta: float):
-	position += direction * speed * delta
-
-#func _on_hit_box_area_entered(area: Area2D) -> void:
-	#if area.is_in_group("hurt_box"):
-		#pierce -= 1
-		#if pierce <= 0:
-			#queue_free()
-
+	if !is_return:
+		position += direction * speed * delta
+	else:
+		direction = (return_target.global_position - global_position).normalized()
+		position += direction * speed * delta
+		if (return_target.global_position - position)
+		
 
 func _on_return_timer_timeout() -> void:
-	pass # Replace with function body.
+	is_return = true
