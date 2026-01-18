@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://gu3n02taqnx2"]
+
+[ext_resource type="Script" uid="uid://cqvsukpi8a8qr" path="res://Attacks/javelin.gd" id="1_nxkuw"]
+[ext_resource type="Texture2D" uid="uid://dlsdonnu7e0sd" path="res://Textures/Items/Weapons/javelin_3_new_attack.png" id="1_q1dmw"]
+[ext_resource type="Texture2D" uid="uid://b8u3cishaj3qm" path="res://Textures/Items/Weapons/javelin_3_new.png" id="2_ijvbt"]
+[ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="3_ijvbt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nxkuw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q1dmw")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ijvbt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijvbt"]
+size = Vector2(36, 4)
+
+[node name="javelin" type="Node2D"]
+script = ExtResource("1_nxkuw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 2.3561945
+sprite_frames = SubResource("SpriteFrames_nxkuw")
+animation = &"attack"
+
+[node name="hit_box" parent="." instance=ExtResource("3_ijvbt")]
+
+[node name="CollisionShape2D" parent="hit_box" index="0"]
+shape = SubResource("RectangleShape2D_ijvbt")
+
+[node name="return_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="return_timer" to="." method="_on_return_timer_timeout"]
+
+[editable path="hit_box"]
