@@ -71,11 +71,15 @@ shape = SubResource("RectangleShape2D_i3pqv")
 
 [node name="ice_spear_timer" type="Timer" parent="."]
 
+[node name="javelin_timer" type="Timer" parent="."]
+wait_time = 2.5
+
 [node name="tornado_timer" type="Timer" parent="."]
 wait_time = 5.0
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
+[connection signal="timeout" from="javelin_timer" to="." method="_on_javelin_timer_timeout"]
 [connection signal="timeout" from="tornado_timer" to="." method="_on_tornado_timer_timeout"]
 
 [editable path="hurt_box"]

@@ -11,6 +11,8 @@ var _last_hit_msec_by_hitbox: Dictionary[int, int] = {}
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("damage"):
 		if area.get("damage") != null:
+			if area.has_method("can_hit_hurtbox") and not area.can_hit_hurtbox(self):
+				return
 			match HurtBoxType:
 				0:
 					collision.set_deferred("disabled", true)

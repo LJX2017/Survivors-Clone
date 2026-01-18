@@ -11,11 +11,12 @@ var direction = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var ice_spear_timer = $ice_spear_timer
 @onready var tornado_timer = $tornado_timer
+@onready var javelin_timer = $javelin_timer
 @export var number_of_tornados: int = 1
 
 func _ready() -> void:
 	#_on_tornado_timer_timeout()
-	_spawn_javelin()
+	javelin_timer.start()
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -68,13 +69,19 @@ func _on_tornado_timer_timeout() -> void:
 		get_parent().add_child.call_deferred(tornado)
 	tornado_timer.start()
 
-func _spawn_javelin() -> void:
+func _on_javelin_timer_timeout() -> void:
 	if javelin_scene == null:
 		print("javelin_scene is null")
 		return
 	var javelin: Node2D = javelin_scene.instantiate()
+	var target = get_nearest_enemy()
+	var aim_direction = Vector2.RIGHT
+	if target != null:
+		aim_direction = (target.global_position - global_position).normalized()
+	javelin.global_position = global_position
 	javelin.player = self
-	get_parent().add_child.call_deferred(javelin)
+	javelin.direction = aim_direction
+	get_parent().add_child(javelin)
 	
 func get_nearest_enemy() -> Node2D:
 	var nearest: Node2D = null
