@@ -5,7 +5,7 @@ var speed = 40.0
 var direction = Vector2.ZERO
 @export var ice_spear_scene: PackedScene
 @export var tornado_scene: PackedScene
-@export var boomerang_javelin_scene: PackedScene
+@export var javelin_scene: PackedScene
 
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -14,8 +14,8 @@ var direction = Vector2.ZERO
 @export var number_of_tornados: int = 1
 
 func _ready() -> void:
-	_on_tornado_timer_timeout()
-	_spawn_boomerang_javelin()
+	#_on_tornado_timer_timeout()
+	_spawn_javelin()
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -68,13 +68,13 @@ func _on_tornado_timer_timeout() -> void:
 		get_parent().add_child.call_deferred(tornado)
 	tornado_timer.start()
 
-func _spawn_boomerang_javelin() -> void:
-	if boomerang_javelin_scene == null:
-		print("boomerang_javelin_scene is null")
+func _spawn_javelin() -> void:
+	if javelin_scene == null:
+		print("javelin_scene is null")
 		return
-	var javelin: Node2D = boomerang_javelin_scene.instantiate()
+	var javelin: Node2D = javelin_scene.instantiate()
 	javelin.player = self
-	get_parent().add_child(javelin)
+	get_parent().add_child.call_deferred(javelin)
 	
 func get_nearest_enemy() -> Node2D:
 	var nearest: Node2D = null

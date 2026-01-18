@@ -1,19 +1,21 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3eau3a0n0ug0"]
 
-[ext_resource type="Script" uid="uid://d2r3t21wme3p7" path="res://Attacks/boomerang_javelin.gd" id="1_m4c5k"]
-[ext_resource type="Texture2D" uid="uid://d0y6h1uj2b3dj" path="res://Textures/Items/Weapons/javelin_3_new.png" id="2_6d0hf"]
-[ext_resource type="Texture2D" uid="uid://c1gl6x4dpn7c6" path="res://Textures/Items/Weapons/javelin_3_new_attack.png" id="3_u4l7b"]
+[ext_resource type="Script" uid="uid://buv822ixsj583" path="res://Attacks/boomerang_javelin.gd" id="1_m4c5k"]
+[ext_resource type="Texture2D" uid="uid://b8u3cishaj3qm" path="res://Textures/Items/Weapons/javelin_3_new.png" id="2_6d0hf"]
+[ext_resource type="Texture2D" uid="uid://dlsdonnu7e0sd" path="res://Textures/Items/Weapons/javelin_3_new_attack.png" id="3_u4l7b"]
 [ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="4_8wsh8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8j6pp"]
 size = Vector2(22, 8)
 
-[node name="boomerang_javelin" type="Node2D"]
+[node name="javelin" type="Node2D"]
 script = ExtResource("1_m4c5k")
+damage = 5.0
 idle_texture = ExtResource("2_6d0hf")
 attack_texture = ExtResource("3_u4l7b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 2.3561945
 texture = ExtResource("2_6d0hf")
 
 [node name="throw_timer" type="Timer" parent="."]
