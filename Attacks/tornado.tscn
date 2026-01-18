@@ -9,6 +9,7 @@ size = Vector2(17, 26)
 
 [node name="tornado" type="Node2D"]
 script = ExtResource("1_g7vm2")
+damage = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_g7vm2")
@@ -19,8 +20,6 @@ wait_time = 2.0
 [node name="hit_box" parent="." instance=ExtResource("3_m06ql")]
 collision_layer = 4
 collision_mask = 4
-knockback_amount = 150.0
-damage = 5.0
 
 [node name="CollisionShape2D" parent="hit_box" index="0"]
 position = Vector2(0.5, 1)

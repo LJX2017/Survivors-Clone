@@ -4,6 +4,7 @@ extends Node2D
 @export var angular_speed: float = 3
 @export var lifetime: float = 2
 @export var damage: float = 2
+@export var knockback_amount = 150
 
 @onready var hit_box = get_node('hit_box')
 @onready var lifetime_timer = get_node("lifetime_timer")
@@ -19,6 +20,8 @@ func _ready() -> void:
 	prev_position = global_position
 	lifetime_timer.wait_time = lifetime
 	lifetime_timer.start()
+	hit_box.knockback_amount = knockback_amount
+	hit_box.damage = damage
 
 func _physics_process(delta: float) -> void:
 	if center == null:

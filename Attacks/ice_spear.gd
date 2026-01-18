@@ -4,6 +4,8 @@ extends Node2D
 @export var speed: float = 300.0
 @export var pierce: int = 1
 @export var lifetime = 5
+@export var damage: float = 2
+@export var knockback_amount = 150
 @onready var hit_box = get_node("hit_box")
 @onready var lifetime_timer = get_node("lifetime_timer")
 
@@ -13,6 +15,8 @@ var direction = Vector2.RIGHT
 func _ready() -> void:
 	rotation = direction.angle()
 	hit_box.direction = direction
+	hit_box.knockback_amount = knockback_amount
+	hit_box.damage = damage
 	lifetime_timer.wait_time = lifetime
 	lifetime_timer.start()
 	
