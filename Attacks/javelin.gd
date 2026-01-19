@@ -13,14 +13,19 @@ extends Node2D
 
 var direction = Vector2.RIGHT
 
-var thresh: float = 1
+var thresh: float = 5
 
 var return_target: Node2D = null
 
 
 var stage = 0
 
-# Called when the node enters the scene tree for the first time.
+func disable_hit():
+	hit_box.collision.set_deferred("disabled", true)
+	
+func enable_hit():
+	hit_box.collision.set_deferred("disabled", false)
+
 func _ready() -> void:
 	animated_sprite.play("attack")
 	rotation = direction.angle()
@@ -28,6 +33,7 @@ func _ready() -> void:
 	hit_box.knockback_amount = knockback_amount
 	hit_box.damage = damage
 	return_timer.wait_time = return_time
+	enable_hit()
 	return_timer.start()
 	idle_timer.wait_time = idle_time
 
@@ -43,15 +49,16 @@ func _physics_process(delta: float):
 		position += direction * speed * delta
 		if (position.distance_squared_to(return_target.global_position) < thresh):
 			queue_free()
-		
 
 func _on_return_timer_timeout() -> void:
 	if stage == 0:
 		animated_sprite.play("idle")
 		stage = 1
+		disable_hit()
 		idle_timer.start()
-
 
 func _on_idle_timer_timeout() -> void:
 	if stage == 1:
+		enable_hit()
+		animated_sprite.play("attack")
 		stage = 2
