@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://sd57a0q42vso"]
+
+[ext_resource type="Texture2D" uid="uid://4hkntoctedii" path="res://Textures/Items/Gems/Gem_blue.png" id="1_kn3jl"]
+[ext_resource type="Script" uid="uid://ci0pffi20bwj2" path="res://Objects/experience_gem.gd" id="1_xtoxu"]
+[ext_resource type="Texture2D" uid="uid://bolyi6x3nu5av" path="res://Textures/Items/Gems/Gem_green.png" id="2_xtoxu"]
+[ext_resource type="Texture2D" uid="uid://dfk16ldho4616" path="res://Textures/Items/Gems/Gem_red.png" id="3_kgpw6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kn3jl"]
+size = Vector2(14, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxmqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kn3jl")
+}],
+"loop": false,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xtoxu")
+}],
+"loop": false,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kgpw6")
+}],
+"loop": false,
+"name": &"red",
+"speed": 5.0
+}]
+
+[node name="experience_gem" type="Area2D"]
+script = ExtResource("1_xtoxu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_kn3jl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lxmqv")
+animation = &"blue"
