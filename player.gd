@@ -108,3 +108,8 @@ func get_viewport_world_rect() -> Rect2:
 	var size := vp.get_visible_rect().size * cam.zoom
 	var top_left := cam.global_position - size * 0.5
 	return Rect2(top_left, size)
+
+
+func _on_pickup_area_entered(area: Area2D) -> void:
+	if area.is_in_group("loot"):
+		area.target = self

@@ -35,7 +35,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="experience_gem" type="Area2D"]
+[node name="experience_gem" type="Area2D" groups=["loot"]]
 script = ExtResource("1_xtoxu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

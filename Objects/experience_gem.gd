@@ -2,7 +2,11 @@ extends Area2D
 
 @export var experience: int = 1
 @onready var sprite: AnimatedSprite2D = get_node("AnimatedSprite2D")
-# Called when the node enters the scene tree for the first time.
+
+var speed: float = 0
+var target: Node2D = null
+var thresh: float = 5.0
+
 func _ready() -> void:
 	if experience < 5:
 		sprite.play("green")
@@ -14,4 +18,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if target != null:
+		global_position.move_toward(target.global_position, speed)
+		speed += 2 * delta
+		if global_position.distance_to(target.global_position) <= thresh:
+			queue_free()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://dhb0kil63lshi"]
+[gd_scene load_steps=10 format=4 uid="uid://dhb0kil63lshi"]
 
 [ext_resource type="Texture2D" uid="uid://dxtsjtql56noq" path="res://Textures/dirt_full_new.png" id="1_rafyw"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="2_w4ohl"]
 [ext_resource type="PackedScene" uid="uid://xl62p264dnul" path="res://Utils/enemy_spawner.tscn" id="3_ing58"]
 [ext_resource type="Script" uid="uid://4sfnuqnuucjn" path="res://Utils/spawn_info.gd" id="4_mlhrl"]
 [ext_resource type="PackedScene" uid="uid://d0nr6icds53ur" path="res://kolbold_weak.tscn" id="5_mpga5"]
+[ext_resource type="PackedScene" uid="uid://sd57a0q42vso" path="res://Objects/experience_gem.tscn" id="6_mpga5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4ohl"]
 texture = ExtResource("1_rafyw")
@@ -34,3 +35,12 @@ unique_name_in_owner = true
 
 [node name="enemy_spawner" parent="." instance=ExtResource("3_ing58")]
 spawns = Array[ExtResource("4_mlhrl")]([SubResource("Resource_0j8i5")])
+
+[node name="experience_gem" parent="." instance=ExtResource("6_mpga5")]
+position = Vector2(72, 70)
+
+[node name="experience_gem2" parent="." instance=ExtResource("6_mpga5")]
+position = Vector2(13, 112)
+
+[node name="experience_gem3" parent="." instance=ExtResource("6_mpga5")]
+position = Vector2(157, 122)
