@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0nr6icds53ur"]
+[gd_scene load_steps=29 format=3 uid="uid://d0nr6icds53ur"]
 
 [ext_resource type="Texture2D" uid="uid://cushchqd51e2y" path="res://Textures/Enemy/kolbold_weak.png" id="1_3sp8v"]
 [ext_resource type="Script" uid="uid://dy6qbaa162q6i" path="res://kolbold_weak.gd" id="1_atjbm"]
+[ext_resource type="PackedScene" uid="uid://sd57a0q42vso" path="res://Objects/experience_gem.tscn" id="2_6pyar"]
 [ext_resource type="Texture2D" uid="uid://xcij8m3ugndc" path="res://Textures/Enemy/explosion_pixelfied.png" id="2_y8chg"]
 [ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="3_mvyi5"]
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_y8chg"]
@@ -157,6 +158,7 @@ size = Vector2(12, 17)
 
 [node name="kolbold_weak" type="CharacterBody2D"]
 script = ExtResource("1_atjbm")
+gem_scene = ExtResource("2_6pyar")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4cpb7")

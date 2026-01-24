@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var hp: float = 10
 @export var speed: float = 20.0
 @export var knockback_recovery = 3.5
+@export var gem_scene: PackedScene
 var direction = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
@@ -45,5 +46,8 @@ func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_am
 		collision.set_deferred("disabled", true)
 		hitbox.set_deferred("disable_mode", true)
 		await animated_sprite.animation_finished
+		var gem = gem_scene.instantiate()
+		gem.global_position = global_position
+		get_parent().add_child(gem)
 		queue_free()
 	knockback = knockback_direction * knockback_amount
