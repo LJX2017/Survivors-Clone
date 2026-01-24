@@ -17,11 +17,17 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1500
-window/size/viewport_height=1000
+window/size/viewport_width=640
+window/size/viewport_height=360
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-window/stretch/scale=3.0
+
+[gui]
+
+theme/stretch/aspect="keep"
+theme/stretch/mode="disabled"
+theme/size/viewport_height=1000
+theme/size/viewport_width=1500
+theme/stretch/scale=4.4
 
 [input]
 
