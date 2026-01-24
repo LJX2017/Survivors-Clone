@@ -4,6 +4,8 @@
 
 [node name="enemy_spawner" type="Node2D"]
 script = ExtResource("1_hsdm5")
+spawns = null
+time = null
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

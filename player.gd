@@ -12,10 +12,19 @@ var direction = Vector2.ZERO
 @onready var ice_spear_timer = $ice_spear_timer
 @onready var tornado_timer = $tornado_timer
 @onready var javelin_timer = $javelin_timer
+@onready var experience_bar = $GUI_Layer/GUI/experience_bar
+@onready var level_label = $GUI_Layer/GUI/experience_bar/level_label
+@onready var experience_pickup_range = $experience_pickup_range
 @export var number_of_tornados: int = 1
 
+var level: int = 1
+var current_xp: int = 0
+var base_xp: int = 10
+var xp_growth: int = 5
+
 func _ready() -> void:
-	pass
+	experience_pickup_range.area_entered.connect(_on_experience_pickup_range_area_entered)
+	_update_experience_ui()
 	#_on_tornado_timer_timeout()
 
 func _physics_process(delta: float) -> void:
@@ -44,6 +53,27 @@ func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_am
 	hp -= damage
 	print(hp)
 
+func _on_experience_pickup_range_area_entered(area: Area2D) -> void:
+	if not area.is_in_group("gems"):
+		return
+	area.target = self
+	if not area.pickup.is_connected(_on_gem_pickup):
+		area.pickup.connect(_on_gem_pickup)
+
+func _on_gem_pickup(amount: int) -> void:
+	current_xp += amount
+	while current_xp >= _xp_to_next(level):
+		current_xp -= _xp_to_next(level)
+		level += 1
+	_update_experience_ui()
+
+func _update_experience_ui() -> void:
+	experience_bar.max_value = _xp_to_next(level)
+	experience_bar.value = current_xp
+	level_label.text = "level: %d" % level
+
+func _xp_to_next(lvl: int) -> int:
+	return base_xp + (lvl - 1) * xp_growth
 
 func _on_ice_spear_timer_timeout() -> void:
 	if ice_spear_scene == null:

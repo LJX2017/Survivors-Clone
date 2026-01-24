@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=15 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://ce834yu180h1o" path="res://Attacks/tornado.tscn" id="3_sweqy"]
 [ext_resource type="PackedScene" uid="uid://gu3n02taqnx2" path="res://Attacks/javelin.tscn" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://c1n44lhc15ihu" path="res://Textures/GUI/exp_background.png" id="7_dw050"]
+[ext_resource type="Texture2D" uid="uid://o8odxvg5tioa" path="res://Textures/GUI/exp_progress.png" id="8_b26j0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -35,6 +37,9 @@ height = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
 size = Vector2(10, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dw050"]
+radius = 50.039986
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_onrkg")
@@ -77,6 +82,37 @@ wait_time = 5.0
 [node name="javelin_timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="GUI_Layer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUI_Layer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="experience_bar" type="TextureProgressBar" parent="GUI_Layer/GUI"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 20.0
+value = 30.0
+texture_under = ExtResource("7_dw050")
+texture_progress = ExtResource("8_b26j0")
+
+[node name="level_label" type="Label" parent="GUI_Layer/GUI/experience_bar"]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 23.0
+text = "level: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="experience_pickup_range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="experience_pickup_range"]
+shape = SubResource("CircleShape2D_dw050")
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]

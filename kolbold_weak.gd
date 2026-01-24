@@ -8,6 +8,7 @@ var direction = Vector2.ZERO
 @onready var collision = $CollisionShape2D
 @onready var hitbox = $hit_box
 var player: Node2D
+@export var gem_scene: PackedScene
 
 var knockback: Vector2 = Vector2.ZERO
 
@@ -39,6 +40,10 @@ func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_am
 	hp -= damage
 	if hp <= 0:
 		animated_sprite.play("explode")
+		if gem_scene != null:
+			var gem = gem_scene.instantiate()
+			gem.global_position = global_position
+			get_parent().add_child(gem)
 		collision_layer = 0
 		collision_mask = 0
 		set_physics_process(false)
