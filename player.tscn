@@ -110,6 +110,11 @@ offset_right = 54.0
 offset_bottom = 20.0
 text = "level: 1"
 
+[node name="level_up_container" type="Control" parent="GUILayer/GUI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
 [connection signal="timeout" from="tornado_timer" to="." method="_on_tornado_timer_timeout"]
