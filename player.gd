@@ -14,8 +14,15 @@ var direction = Vector2.ZERO
 @onready var javelin_timer = $javelin_timer
 @export var number_of_tornados: int = 1
 
+@onready var experience_bar = $GUILayer/GUI/experience_bar
+@onready var level_label = $GUILayer/GUI/experience_bar/level_label
+
+var current_level: int = 1
+var current_exp: int = 0
+var xp_growth: int = 3
+
 func _ready() -> void:
-	pass
+	update_level()
 	#_on_tornado_timer_timeout()
 
 func _physics_process(delta: float) -> void:
@@ -109,12 +116,24 @@ func get_viewport_world_rect() -> Rect2:
 	var top_left := cam.global_position - size * 0.5
 	return Rect2(top_left, size)
 
+func get_max_exp():
+	return current_level * xp_growth
+	
+func update_level():
+	while current_exp >= get_max_exp():
+		current_exp -= get_max_exp()
+		current_level += 1
+	experience_bar.max_value = get_max_exp()
+	experience_bar.value = current_exp
+	level_label.text = "level: " + str(current_level)
+
 func _on_gem_pickup(experience: int):
-	print("PICK UP GEM!!")
+	current_exp += experience
+	update_level()
 
 func _on_pickup_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
 		area.target = self
 		if not area.pickup.is_connected(_on_gem_pickup):
-ss			area.pickup.connect("pickup", _on_gem_pickup)
+			area.pickup.connect(_on_gem_pickup)
 		
