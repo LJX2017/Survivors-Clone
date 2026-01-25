@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=15 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://ce834yu180h1o" path="res://Attacks/tornado.tscn" id="3_sweqy"]
 [ext_resource type="PackedScene" uid="uid://gu3n02taqnx2" path="res://Attacks/javelin.tscn" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://c1n44lhc15ihu" path="res://Textures/GUI/exp_background.png" id="7_dw050"]
+[ext_resource type="Texture2D" uid="uid://o8odxvg5tioa" path="res://Textures/GUI/exp_progress.png" id="8_b26j0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -85,6 +87,29 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickup"]
 shape = SubResource("CircleShape2D_2hs0m")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="experience_bar" type="TextureProgressBar" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 30.0
+texture_under = ExtResource("7_dw050")
+texture_progress = ExtResource("8_b26j0")
+
+[node name="level_label" type="Label" parent="GUILayer/GUI/experience_bar"]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 54.0
+offset_bottom = 20.0
+text = "level: 1"
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
