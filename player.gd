@@ -123,8 +123,11 @@ func update_level():
 	while current_exp >= get_max_exp():
 		current_exp -= get_max_exp()
 		current_level += 1
-	experience_bar.max_value = get_max_exp()
-	experience_bar.value = current_exp
+	experience_bar.max_value = float(get_max_exp())
+	if current_level > 1:
+		experience_bar.value = get_max_exp()
+	else:
+		experience_bar.value = current_exp
 	level_label.text = "level: " + str(current_level)
 
 func _on_gem_pickup(experience: int):
@@ -137,3 +140,8 @@ func _on_pickup_area_entered(area: Area2D) -> void:
 		if not area.pickup.is_connected(_on_gem_pickup):
 			area.pickup.connect(_on_gem_pickup)
 		
+
+@onready var upgrade_menu: Control = $"GUILayer/GUI/upgrade_menu"
+func _on_model_card_pressed() -> void:
+	print("button 1 pressed!")
+	upgrade_menu.visible

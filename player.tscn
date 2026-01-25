@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=16 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://gu3n02taqnx2" path="res://Attacks/javelin.tscn" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://c1n44lhc15ihu" path="res://Textures/GUI/exp_background.png" id="7_dw050"]
 [ext_resource type="Texture2D" uid="uid://o8odxvg5tioa" path="res://Textures/GUI/exp_progress.png" id="8_b26j0"]
+[ext_resource type="PackedScene" uid="uid://c6k8lxxv4nxpr" path="res://Utils/model_card.tscn" id="10_n7ghd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -104,16 +105,42 @@ texture_under = ExtResource("7_dw050")
 texture_progress = ExtResource("8_b26j0")
 
 [node name="level_label" type="Label" parent="GUILayer/GUI/experience_bar"]
-layout_mode = 0
-offset_top = -3.0
-offset_right = 54.0
-offset_bottom = 20.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_bottom = 23.0
+grow_horizontal = 0
 text = "level: 1"
+
+[node name="upgrade_menu" type="Control" parent="GUILayer/GUI"]
+anchors_preset = 0
+offset_right = 236.0
+offset_bottom = 281.0
+
+[node name="model card" parent="GUILayer/GUI/upgrade_menu" instance=ExtResource("10_n7ghd")]
+layout_mode = 0
+
+[node name="model card2" parent="GUILayer/GUI/upgrade_menu" instance=ExtResource("10_n7ghd")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 98.0
+offset_right = 234.0
+offset_bottom = 186.0
+
+[node name="model card3" parent="GUILayer/GUI/upgrade_menu" instance=ExtResource("10_n7ghd")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 192.0
+offset_right = 234.0
+offset_bottom = 280.0
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
 [connection signal="timeout" from="tornado_timer" to="." method="_on_tornado_timer_timeout"]
 [connection signal="timeout" from="javelin_timer" to="." method="_on_javelin_timer_timeout"]
 [connection signal="area_entered" from="pickup" to="." method="_on_pickup_area_entered"]
+[connection signal="pressed" from="GUILayer/GUI/upgrade_menu/model card" to="." method="_on_model_card_pressed"]
 
 [editable path="hurt_box"]
