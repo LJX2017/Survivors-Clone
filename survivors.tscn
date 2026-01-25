@@ -37,10 +37,10 @@ unique_name_in_owner = true
 spawns = Array[ExtResource("4_mlhrl")]([SubResource("Resource_0j8i5")])
 
 [node name="experience_gem" parent="." instance=ExtResource("6_mpga5")]
-position = Vector2(72, 70)
+position = Vector2(48, 45)
 
 [node name="experience_gem2" parent="." instance=ExtResource("6_mpga5")]
-position = Vector2(13, 112)
+position = Vector2(11, 64)
 
 [node name="experience_gem3" parent="." instance=ExtResource("6_mpga5")]
-position = Vector2(157, 122)
+position = Vector2(49, 72)

@@ -22,6 +22,7 @@ var current_exp: int = 0
 var xp_growth: int = 3
 
 func _ready() -> void:
+	upgrade_menu.visible = false
 	update_level()
 	#_on_tornado_timer_timeout()
 
@@ -121,13 +122,12 @@ func get_max_exp():
 	
 func update_level():
 	while current_exp >= get_max_exp():
+		upgrade_menu.visible = true
 		current_exp -= get_max_exp()
 		current_level += 1
+		get_tree().paused = true
 	experience_bar.max_value = float(get_max_exp())
-	if current_level > 1:
-		experience_bar.value = get_max_exp()
-	else:
-		experience_bar.value = current_exp
+	experience_bar.value = current_exp
 	level_label.text = "level: " + str(current_level)
 
 func _on_gem_pickup(experience: int):
@@ -139,9 +139,9 @@ func _on_pickup_area_entered(area: Area2D) -> void:
 		area.target = self
 		if not area.pickup.is_connected(_on_gem_pickup):
 			area.pickup.connect(_on_gem_pickup)
-		
 
 @onready var upgrade_menu: Control = $"GUILayer/GUI/upgrade_menu"
 func _on_model_card_pressed() -> void:
+	get_tree().paused = false
 	print("button 1 pressed!")
-	upgrade_menu.visible
+	upgrade_menu.visible = false

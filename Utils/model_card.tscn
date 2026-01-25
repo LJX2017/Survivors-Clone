@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6k8lxxv4nxpr"]
+[gd_scene load_steps=3 format=3 uid="uid://c6k8lxxv4nxpr"]
 
+[ext_resource type="Script" uid="uid://pxs3tt8ijdcv" path="res://Utils/model_card.gd" id="1_57m0e"]
 [ext_resource type="Texture2D" uid="uid://b5sgfc8xogkp1" path="res://Textures/Items/Weapons/ice_spear.png" id="1_byvum"]
 
 [node name="model card" type="Button"]
 offset_right = 233.0
 offset_bottom = 88.0
+script = ExtResource("1_57m0e")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
