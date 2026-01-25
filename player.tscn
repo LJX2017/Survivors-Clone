@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=16 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://gu3n02taqnx2" path="res://Attacks/javelin.tscn" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://c1n44lhc15ihu" path="res://Textures/GUI/exp_background.png" id="7_dw050"]
 [ext_resource type="Texture2D" uid="uid://o8odxvg5tioa" path="res://Textures/GUI/exp_progress.png" id="8_b26j0"]
+[ext_resource type="PackedScene" uid="uid://dqt84od4rpku7" path="res://GUI/upgrade_card.tscn" id="9_b26j0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -89,12 +90,15 @@ autostart = true
 shape = SubResource("CircleShape2D_2hs0m")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
+process_mode = 2
 
 [node name="GUI" type="Control" parent="GUILayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="experience_bar" type="TextureProgressBar" parent="GUILayer/GUI"]
 layout_mode = 0
@@ -110,15 +114,42 @@ offset_right = 54.0
 offset_bottom = 20.0
 text = "level: 1"
 
-[node name="level_up_container" type="Control" parent="GUILayer/GUI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="level_up_menu" type="Control" parent="GUILayer/GUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.5
+offset_top = -132.0
+offset_right = 133.5
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="upgrade_card1" parent="GUILayer/GUI/level_up_menu" instance=ExtResource("9_b26j0")]
+layout_mode = 0
+
+[node name="upgrade_card2" parent="GUILayer/GUI/level_up_menu" instance=ExtResource("9_b26j0")]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 90.0
+offset_right = 266.0
+offset_bottom = 172.0
+
+[node name="upgrade_card3" parent="GUILayer/GUI/level_up_menu" instance=ExtResource("9_b26j0")]
+layout_mode = 0
+offset_top = 180.0
+offset_bottom = 262.0
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
 [connection signal="timeout" from="tornado_timer" to="." method="_on_tornado_timer_timeout"]
 [connection signal="timeout" from="javelin_timer" to="." method="_on_javelin_timer_timeout"]
 [connection signal="area_entered" from="pickup" to="." method="_on_pickup_area_entered"]
+[connection signal="pressed" from="GUILayer/GUI/level_up_menu/upgrade_card1" to="." method="_on_upgrade_card_1_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/level_up_menu/upgrade_card2" to="." method="_on_upgrade_card_2_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/level_up_menu/upgrade_card3" to="." method="_on_upgrade_card_3_pressed"]
 
 [editable path="hurt_box"]

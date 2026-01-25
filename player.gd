@@ -17,11 +17,14 @@ var direction = Vector2.ZERO
 @onready var experience_bar = $GUILayer/GUI/experience_bar
 @onready var level_label = $GUILayer/GUI/experience_bar/level_label
 
+@onready var level_up_menu = $GUILayer/GUI/level_up_menu
+
 var current_level: int = 1
 var current_exp: int = 0
 var xp_growth: int = 3
 
 func _ready() -> void:
+	level_up_menu.visible = false
 	update_level()
 	#_on_tornado_timer_timeout()
 
@@ -121,6 +124,8 @@ func get_max_exp():
 	
 func update_level():
 	while current_exp >= get_max_exp():
+		level_up_menu.visible = true
+		get_tree().paused = true
 		current_exp -= get_max_exp()
 		current_level += 1
 	experience_bar.max_value = get_max_exp()
@@ -136,4 +141,22 @@ func _on_pickup_area_entered(area: Area2D) -> void:
 		area.target = self
 		if not area.pickup.is_connected(_on_gem_pickup):
 			area.pickup.connect(_on_gem_pickup)
-		
+
+
+func _on_upgrade_card_1_pressed() -> void:
+	print("button 1")
+	process_upgrade() # Replace with function body.
+
+
+func _on_upgrade_card_2_pressed() -> void:
+	print("button 2")
+	process_upgrade() # Replace with function body.
+
+
+func _on_upgrade_card_3_pressed() -> void:
+	print("button 3")
+	process_upgrade() # Replace with function body.
+
+func process_upgrade():
+	level_up_menu.visible = false
+	get_tree().paused = false
