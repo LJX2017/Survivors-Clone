@@ -4,6 +4,9 @@ var MAX_HP: int = 10
 var hp: int = MAX_HP
 var speed = 40.0
 var direction = Vector2.ZERO
+
+var seconds_passed: int = 0
+
 @export var ice_spear_scene: PackedScene
 @export var tornado_scene: PackedScene
 @export var javelin_scene: PackedScene
@@ -20,6 +23,7 @@ var direction = Vector2.ZERO
 
 @onready var level_up_menu = $GUILayer/GUI/level_up_menu
 @onready var health_bar = $GUILayer/GUI/health_bar
+@onready var timer = $GUILayer/timer
 
 var current_level: int = 1
 var current_exp: int = 0
@@ -33,6 +37,7 @@ func _ready() -> void:
 	#_on_tornado_timer_timeout()
 
 func _physics_process(delta: float) -> void:
+	update_timer()
 	movement(delta)
 	update_animation()
 
@@ -53,6 +58,21 @@ func update_animation():
 	elif direction.x < 0:
 		animated_sprite.flip_h = false
 
+func update_timer():
+	var time: int = Time.get_ticks_msec()
+	if int(time / 1000) > seconds_passed:
+		seconds_passed = int(time / 1000)
+		var minutes = seconds_passed / 60
+		var seconds = seconds_passed % 60
+		if minutes < 10:
+			timer.text = '0' + str(minutes)
+		else:
+			timer.text = str(minutes)
+		timer.text += ':'
+		if seconds < 10:
+			timer.text += '0' + str(seconds)
+		else:
+			timer.text += str(seconds)
 
 func _on_hurt_box_hurt(damage: float, _knockback_direction: Vector2, _knockback_amount: float) -> void:
 	hp -= damage
