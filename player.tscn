@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckudr8chj1kgo"]
+[gd_scene load_steps=18 format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Texture2D" uid="uid://dvrb6l4kr70u8" path="res://Textures/Player/player_sprite.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_onrkg"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c1n44lhc15ihu" path="res://Textures/GUI/exp_background.png" id="7_dw050"]
 [ext_resource type="Texture2D" uid="uid://o8odxvg5tioa" path="res://Textures/GUI/exp_progress.png" id="8_b26j0"]
 [ext_resource type="PackedScene" uid="uid://dqt84od4rpku7" path="res://GUI/upgrade_card.tscn" id="9_b26j0"]
+[ext_resource type="Texture2D" uid="uid://binv552l2808e" path="res://Textures/GUI/healthbar.png" id="10_nvl01"]
+[ext_resource type="Texture2D" uid="uid://6612md7f6hot" path="res://Textures/GUI/health.png" id="11_ivps1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -142,6 +144,35 @@ offset_bottom = 172.0
 layout_mode = 0
 offset_top = 180.0
 offset_bottom = 262.0
+
+[node name="health_bar" type="TextureProgressBar" parent="GUILayer/GUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = 17.0
+offset_right = 16.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 80.0
+value = 80.0
+texture_under = ExtResource("10_nvl01")
+texture_progress = ExtResource("11_ivps1")
+
+[node name="timer" type="Label" parent="GUILayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 20.0
+offset_right = 21.0
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "00:00"
 
 [connection signal="hurt" from="hurt_box" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="ice_spear_timer" to="." method="_on_ice_spear_timer_timeout"]
