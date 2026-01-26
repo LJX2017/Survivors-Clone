@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-var hp = 80
+var MAX_HP: int = 10
+var hp: int = MAX_HP
 var speed = 40.0
 var direction = Vector2.ZERO
 @export var ice_spear_scene: PackedScene
@@ -18,6 +19,7 @@ var direction = Vector2.ZERO
 @onready var level_label = $GUILayer/GUI/experience_bar/level_label
 
 @onready var level_up_menu = $GUILayer/GUI/level_up_menu
+@onready var health_bar = $GUILayer/GUI/health_bar
 
 var current_level: int = 1
 var current_exp: int = 0
@@ -26,6 +28,8 @@ var xp_growth: int = 3
 func _ready() -> void:
 	level_up_menu.visible = false
 	update_level()
+	health_bar.max_value = MAX_HP
+	update_health_bar()
 	#_on_tornado_timer_timeout()
 
 func _physics_process(delta: float) -> void:
@@ -50,10 +54,13 @@ func update_animation():
 		animated_sprite.flip_h = false
 
 
-func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_amount: float) -> void:
+func _on_hurt_box_hurt(damage: float, _knockback_direction: Vector2, _knockback_amount: float) -> void:
 	hp -= damage
+	update_health_bar()
 	print(hp)
 
+func update_health_bar():
+	health_bar.value = hp
 
 func _on_ice_spear_timer_timeout() -> void:
 	if ice_spear_scene == null:
