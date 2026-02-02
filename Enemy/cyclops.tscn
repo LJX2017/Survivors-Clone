@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://du358wuqyo2bj"]
+[gd_scene load_steps=29 format=3 uid="uid://du358wuqyo2bj"]
 
 [ext_resource type="Script" uid="uid://cvla7jgi4svdf" path="res://Enemy/cyclops.gd" id="1_23est"]
 [ext_resource type="Texture2D" uid="uid://xcij8m3ugndc" path="res://Textures/Enemy/explosion_pixelfied.png" id="1_x5u7p"]
 [ext_resource type="Texture2D" uid="uid://8wbr3honbe1" path="res://Textures/Enemy/cyclops.png" id="2_23est"]
+[ext_resource type="PackedScene" uid="uid://sd57a0q42vso" path="res://Objects/experience_gem.tscn" id="2_k8yji"]
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_k8yji"]
 [ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="4_ujbs2"]
 
@@ -158,6 +159,7 @@ size = Vector2(13, 19)
 [node name="cyclops" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_23est")
+gem_scene = ExtResource("2_k8yji")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5c438")
@@ -173,6 +175,8 @@ shape = SubResource("CapsuleShape2D_2otjl")
 position = Vector2(-5, -4)
 collision_layer = 4
 collision_mask = 4
+HurtBoxType = 2
+hit_once_cooldown = 0.1
 
 [node name="CollisionShape2D" parent="hurt_box" index="0"]
 position = Vector2(4.75, 4)

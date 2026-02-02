@@ -173,6 +173,8 @@ shape = SubResource("CapsuleShape2D_atjbm")
 [node name="hurt_box" parent="." groups=["enemies"] instance=ExtResource("3_y8chg")]
 collision_layer = 4
 collision_mask = 4
+HurtBoxType = 2
+hit_once_cooldown = 0.1
 
 [node name="CollisionShape2D" parent="hurt_box" index="0"]
 position = Vector2(0.5, 2.5)
