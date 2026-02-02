@@ -1,19 +1,25 @@
 extends CharacterBody2D
 
 @export var hp: float = 10
+@export var attack_damage: float = 2
 @export var speed: float = 20.0
 @export var knockback_recovery = 3.5
 @export var gem_scene: PackedScene
+@export var experience_drop: int = 1
 var direction = Vector2.ZERO
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var hitbox = $hit_box
+@onready var hurtbox = $hurt_box
 var player: Node2D
 
 var knockback: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
+	if not hurtbox.is_connected("hurt", _on_hurt_box_hurt):
+		hurtbox.connect("hurt", _on_hurt_box_hurt)
+	hitbox.damage = attack_damage
 	animated_sprite.play("walk")
 
 func _physics_process(delta: float) -> void:
@@ -47,6 +53,7 @@ func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_am
 		hitbox.set_deferred("disable_mode", true)
 		await animated_sprite.animation_finished
 		var gem = gem_scene.instantiate()
+		gem.experience = experience_drop
 		gem.global_position = global_position
 		get_parent().add_child(gem)
 		queue_free()

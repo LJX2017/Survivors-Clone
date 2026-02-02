@@ -1,5 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://5kma332ov6ys"]
+[gd_scene load_steps=29 format=3 uid="uid://5kma332ov6ys"]
 
+[ext_resource type="PackedScene" uid="uid://sd57a0q42vso" path="res://Objects/experience_gem.tscn" id="1_hfqbq"]
 [ext_resource type="Texture2D" uid="uid://xcij8m3ugndc" path="res://Textures/Enemy/explosion_pixelfied.png" id="1_tkcot"]
 [ext_resource type="Texture2D" uid="uid://uevvn5547obq" path="res://Textures/Enemy/kolbold_strong.png" id="2_tkcot"]
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_d37lc"]
@@ -8,14 +9,64 @@
 [sub_resource type="GDScript" id="GDScript_tkcot"]
 script/source = "extends CharacterBody2D
 
+@export var hp: float = 10
+@export var attack_damage: float = 2
+@export var speed: float = 20.0
+@export var knockback_recovery = 3.5
+@export var gem_scene: PackedScene
+@export var experience_drop: int = 1
+var direction = Vector2.ZERO
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var collision = $CollisionShape2D
+@onready var hitbox = $hit_box
+@onready var hurtbox = $hurt_box
 var player: Node2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var knockback: Vector2 = Vector2.ZERO
 
+
+func _ready() -> void:
+	if not hurtbox.is_connected(\"hurt\", _on_hurt_box_hurt):
+		hurtbox.connect(\"hurt\", _on_hurt_box_hurt)
+	hitbox.damage = attack_damage
+	animated_sprite.play(\"walk\")
 
 func _physics_process(delta: float) -> void:
-	pass
+	movement(delta)
+	update_animation()
+
+func movement(delta: float):
+	direction = player.global_position - global_position
+	direction = direction.normalized()
+	velocity = direction * speed
+	if knockback != Vector2.ZERO:
+		knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
+		velocity += knockback
+	move_and_collide(velocity * delta)
+
+func update_animation():
+	if direction.x > 0:
+		animated_sprite.flip_h = true
+	elif direction.x < 0:
+		animated_sprite.flip_h = false
+
+
+func _on_hurt_box_hurt(damage: float, knockback_direction: Vector2, knockback_amount: float) -> void:
+	hp -= damage
+	if hp <= 0:
+		animated_sprite.play(\"explode\")
+		collision_layer = 0
+		collision_mask = 0
+		set_physics_process(false)
+		collision.set_deferred(\"disabled\", true)
+		hitbox.set_deferred(\"disable_mode\", true)
+		await animated_sprite.animation_finished
+		var gem = gem_scene.instantiate()
+		gem.experience = experience_drop
+		gem.global_position = global_position
+		get_parent().add_child(gem)
+		queue_free()
+	knockback = knockback_direction * knockback_amount
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6pyar"]
@@ -170,6 +221,10 @@ size = Vector2(13, 19)
 [node name="kolbold_strong" type="CharacterBody2D"]
 scale = Vector2(1.25, 1.25)
 script = SubResource("GDScript_tkcot")
+hp = 20.0
+attack_damage = 4.0
+gem_scene = ExtResource("1_hfqbq")
+experience_drop = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_d37lc")

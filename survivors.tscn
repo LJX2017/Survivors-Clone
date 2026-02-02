@@ -27,8 +27,7 @@ metadata/_custom_type_script = "uid://4sfnuqnuucjn"
 
 [sub_resource type="Resource" id="Resource_fotot"]
 script = ExtResource("4_mlhrl")
-time_start = 5
-time_end = 5
+time_end = 1
 enemy = ExtResource("6_0j8i5")
 enemy_num = 1
 metadata/_custom_type_script = "uid://4sfnuqnuucjn"
