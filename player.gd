@@ -29,6 +29,8 @@ var current_level: int = 1
 var current_exp: int = 0
 var xp_growth: int = 3
 
+var can_upgrade: bool = true
+
 func _ready() -> void:
 	level_up_menu.visible = false
 	update_level()
@@ -150,7 +152,7 @@ func get_max_exp():
 	return current_level * xp_growth
 	
 func update_level():
-	while current_exp >= get_max_exp():
+	if current_exp >= get_max_exp():
 		level_up_menu.visible = true
 		get_tree().paused = true
 		current_exp -= get_max_exp()
@@ -185,5 +187,11 @@ func _on_upgrade_card_3_pressed() -> void:
 	process_upgrade() # Replace with function body.
 
 func process_upgrade():
+	#can_upgrade = true
 	level_up_menu.visible = false
 	get_tree().paused = false
+	if current_exp >= get_max_exp():
+		level_up_menu.visible = true
+		get_tree().paused = true
+		current_exp -= get_max_exp()
+		current_level += 1

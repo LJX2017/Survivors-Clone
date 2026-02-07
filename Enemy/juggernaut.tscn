@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://f43l2sccp2ye"]
+[gd_scene load_steps=29 format=3 uid="uid://f43l2sccp2ye"]
 
 [ext_resource type="Script" uid="uid://di0lmg04l3mhk" path="res://Enemy/juggernaut.gd" id="1_3areq"]
 [ext_resource type="Texture2D" uid="uid://xcij8m3ugndc" path="res://Textures/Enemy/explosion_pixelfied.png" id="1_rlaow"]
 [ext_resource type="Texture2D" uid="uid://plmy3rkfk3m" path="res://Textures/Enemy/juggernaut.png" id="2_3areq"]
+[ext_resource type="PackedScene" uid="uid://sd57a0q42vso" path="res://Objects/experience_gem.tscn" id="2_077cv"]
 [ext_resource type="PackedScene" uid="uid://c3nr172baxcyy" path="res://Utils/hurt_box.tscn" id="3_077cv"]
 [ext_resource type="PackedScene" uid="uid://bf01j5ioru03" path="res://Utils/hit_box.tscn" id="4_1relt"]
 
@@ -158,6 +159,7 @@ size = Vector2(13, 19)
 [node name="juggernaut" type="CharacterBody2D"]
 scale = Vector2(1.7, 1.7)
 script = ExtResource("1_3areq")
+gem_scene = ExtResource("2_077cv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2up5d")
