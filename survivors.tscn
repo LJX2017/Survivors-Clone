@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dhb0kil63lshi"]
+[gd_scene load_steps=16 format=4 uid="uid://dhb0kil63lshi"]
 
 [ext_resource type="Texture2D" uid="uid://dxtsjtql56noq" path="res://Textures/dirt_full_new.png" id="1_rafyw"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="2_w4ohl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://5kma332ov6ys" path="res://Enemy/kolbold_strong.tscn" id="6_0j8i5"]
 [ext_resource type="PackedScene" uid="uid://sd57a0q42vso" path="res://Objects/experience_gem.tscn" id="6_mpga5"]
 [ext_resource type="PackedScene" uid="uid://du358wuqyo2bj" path="res://Enemy/cyclops.tscn" id="7_fotot"]
+[ext_resource type="PackedScene" uid="uid://f43l2sccp2ye" path="res://Enemy/juggernaut.tscn" id="8_guqcy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4ohl"]
 texture = ExtResource("1_rafyw")
@@ -40,6 +41,13 @@ enemy = ExtResource("7_fotot")
 enemy_num = 1
 metadata/_custom_type_script = "uid://4sfnuqnuucjn"
 
+[sub_resource type="Resource" id="Resource_raiau"]
+script = ExtResource("4_mlhrl")
+time_end = 1
+enemy = ExtResource("8_guqcy")
+enemy_num = 2
+metadata/_custom_type_script = "uid://4sfnuqnuucjn"
+
 [node name="Survivors" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -50,7 +58,7 @@ tile_set = SubResource("TileSet_ing58")
 unique_name_in_owner = true
 
 [node name="enemy_spawner" parent="." instance=ExtResource("3_ing58")]
-spawns = Array[ExtResource("4_mlhrl")]([SubResource("Resource_0j8i5"), SubResource("Resource_fotot"), SubResource("Resource_guqcy")])
+spawns = Array[ExtResource("4_mlhrl")]([SubResource("Resource_0j8i5"), SubResource("Resource_fotot"), SubResource("Resource_guqcy"), SubResource("Resource_raiau")])
 
 [node name="experience_gem" parent="." instance=ExtResource("6_mpga5")]
 position = Vector2(72, 70)
